@@ -25,6 +25,12 @@ import Icon from "@mui/material/Icon";
 import VuiBox from "components/VuiBox";
 import VuiTypography from "components/VuiTypography";
 
+// @mui material components
+import { Table as MuiTable } from "@mui/material";
+import TableBody from "@mui/material/TableBody";
+import TableContainer from "@mui/material/TableContainer";
+import TableRow from "@mui/material/TableRow";
+
 // Billing page components
 import Transaction from "layouts/billing/components/Transaction";
 
@@ -53,7 +59,7 @@ function Transactions() {
             },
           })}
         >
-          Your Transaction&apos;s
+          Lista de Movimientos
         </VuiTypography>
         <VuiBox display="flex" alignItems="flex-start">
           <VuiBox color="white" mr="6px" lineHeight={0}>
@@ -62,91 +68,96 @@ function Transactions() {
             </Icon>
           </VuiBox>
           <VuiTypography variant="button" color="text" fontWeight="regular">
-            23 - 30 March 2020
+            1 - 30 Marzo 2023
           </VuiTypography>
         </VuiBox>
       </VuiBox>
       <VuiBox>
-        <VuiBox mb={2}>
-          <VuiTypography
-            variant="caption"
-            color="text"
-            fontWeight="medium"
-            textTransform="uppercase"
-          >
-            newest
-          </VuiTypography>
-        </VuiBox>
-        <VuiBox
-          component="ul"
-          display="flex"
-          flexDirection="column"
-          p={0}
-          m={0}
-          sx={{ listStyle: "none" }}
-        >
-          <Transaction
-            color="error"
-            icon="arrow_downward"
-            name="Netflix"
-            description="27 March 2020, at 12:30 PM"
-            value="- $ 2,500"
-          />
-          <Transaction
-            color="success"
-            icon="arrow_upward"
-            name="Apple"
-            description="27 March 2020, at 04:30 AM"
-            value="+ $ 2,000"
-          />
-        </VuiBox>
-        <VuiBox mt={1} mb={2}>
-          <VuiTypography
-            variant="caption"
-            color="text"
-            fontWeight="medium"
-            textTransform="uppercase"
-          >
-            yesterday
-          </VuiTypography>
-        </VuiBox>
-        <VuiBox
-          component="ul"
-          display="flex"
-          flexDirection="column"
-          p={0}
-          m={0}
-          sx={{ listStyle: "none" }}
-        >
-          <Transaction
-            color="success"
-            icon="arrow_upward"
-            name="Stripe"
-            description="26 March 2020, at 13:45 PM"
-            value="+ $ 750"
-          />
-          <Transaction
-            color="success"
-            icon="arrow_upward"
-            name="HubSpot"
-            description="26 March 2020, at 12:30 PM"
-            value="+ $ 1,000"
-          />
-          <Transaction
-            color="success"
-            icon="arrow_upward"
-            name="HubSpot"
-            description="26 March 2020, at 08:30 AM"
-            value="+ $ 2,500"
-          />
-          <Transaction
-            color="text"
-            icon="priority_high"
-            name="Webflow"
-            description="26 March 2020, at 05:00 AM"
-            value="Pending"
-          />
-        </VuiBox>
+        <TableContainer>
+          <MuiTable>
+            <VuiBox component="thead">
+              <TableRow>
+                <VuiBox
+                  key={"type"}
+                  component="th"
+                  width={"auto"}
+                  textAlign={"left"}
+                  fontSize={8}
+                  color="white">
+                </VuiBox>
+                <VuiBox
+                  key={"id"}
+                  component="th"
+                  width={"auto"}
+                  textAlign={"left"}
+                  fontSize={15}
+                  color="white">
+                  ID
+                </VuiBox>
+                <VuiBox
+                  key={"ammount"}
+                  component="th"
+                  width={"auto"}
+                  textAlign={"left"}
+                  fontSize={15}
+                  color="white">
+                  Monto
+                </VuiBox>
+                <VuiBox
+                  key={"description"}
+                  component="th"
+                  width={"auto"}
+                  textAlign={"left"}
+                  fontSize={15}
+                  color="white">
+                  Descripción
+                </VuiBox>
+                <VuiBox
+                  key={"date"}
+                  component="th"
+                  width={"auto"}
+                  textAlign={"left"}
+                  fontSize={15}
+                  color="white">
+                  Fecha
+                </VuiBox>
+                <VuiBox
+                  key={"actions"}
+                  component="th"
+                  width={"auto"}
+                  textAlign={"left"}
+                  fontSize={15}
+                  color="white">
+                  Accion
+                </VuiBox>
+              </TableRow>
+            </VuiBox>
+            <TableBody>
+              {/* Aqui agregar funcion para cargar movimientos desde BE */}
+              <Transaction
+                id="INC-001"
+                type="Ingreso"
+                ammount="$ 100.00"
+                description="Beca"
+                date="12/12/2021"
+              />
+              <Transaction
+                id="EXP-001"
+                type="Gasto"
+                ammount="$ 100.00"
+                description="Transporte"
+                date="12/12/2021"
+              />
+              <Transaction
+                id="INC-002"
+                type="Ingreso"
+                ammount="$ 100.00"
+                description="Beca"
+                date="12/12/2021"
+              />
+            </TableBody>
+          </MuiTable>
+        </TableContainer>
       </VuiBox>
     </Card>
   );

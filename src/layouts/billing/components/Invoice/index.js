@@ -24,7 +24,7 @@ import VuiBox from "components/VuiBox";
 import VuiTypography from "components/VuiTypography";
 import { IoDocumentText } from "react-icons/io5";
 
-function Invoice({ date, id, price }) {
+function Invoice({ id, type, ammount, description, date, noGutter }) {
   return (
     <VuiBox
       component="li"
@@ -35,22 +35,35 @@ function Invoice({ date, id, price }) {
     >
       <VuiBox lineHeight={1}>
         <VuiTypography display="block" variant="button" fontWeight="medium" color="white">
-          {date}
+          {type === "Ingreso" ? (
+            <VuiTypography variant="button" color="success">
+              {id}
+            </VuiTypography>
+          ) : (
+            <VuiTypography variant="button" color="error">
+              {id}
+            </VuiTypography>
+          )}
         </VuiTypography>
         <VuiTypography variant="caption" fontWeight="regular" color="text">
-          {id}
+          {description}
         </VuiTypography>
-      </VuiBox>
-      <VuiBox display="flex" alignItems="center">
-        <VuiTypography variant="button" fontWeight="regular" color="text">
-          {price}
+        &nbsp;&nbsp;
+        <VuiTypography variant="caption" fontWeight="regular" color="text">
+          {type === "Ingreso" ? (
+            <VuiTypography variant="caption" fontWeight="regular" color="success">
+              +{ammount}
+            </VuiTypography>
+          ) : (
+            <VuiTypography variant="caption" fontWeight="regular" color="error">
+              -{ammount}
+            </VuiTypography>
+          )}
         </VuiTypography>
-        <VuiBox display="flex" alignItems="center" lineHeight={0} ml={3} sx={{ cursor: "poiner" }}>
-          <IoDocumentText color="#fff" size="15px" />
-          <VuiTypography variant="button" fontWeight="medium" color="text">
-            &nbsp;PDF
-          </VuiTypography>
-        </VuiBox>
+        &nbsp;&nbsp;
+        <VuiTypography variant="caption" fontWeight="regular" color="text">
+          {date}
+        </VuiTypography>
       </VuiBox>
     </VuiBox>
   );
@@ -63,10 +76,7 @@ Invoice.defaultProps = {
 
 // Typechecking props for the Invoice
 Invoice.propTypes = {
-  date: PropTypes.string.isRequired,
-  id: PropTypes.string.isRequired,
-  price: PropTypes.string.isRequired,
-  noGutter: PropTypes.bool,
+
 };
 
 export default Invoice;

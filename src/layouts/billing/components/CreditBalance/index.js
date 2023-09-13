@@ -59,38 +59,6 @@ const CreditBalance = () => {
             <VuiBox component="img" src={Graph} sx={{ width: "58px", height: "20px" }} />
           </VuiBox>
         </VuiBox>
-        <VuiTypography color="text" variant="xxs" fontWeight="medium" mb="8px">
-          NEWEST
-        </VuiTypography>
-        <VuiBox display="flex" justifyContent="space-beetween" alignItems="center">
-          <Stack direction="row" spacing="10px" mr="auto">
-            <VuiBox
-              display="flex"
-              mr="10px"
-              justifyContent="center"
-              alignItems="center"
-              sx={{
-                background: "rgba(34, 41, 78, 0.7)",
-                borderRadius: "50%",
-                width: "42px",
-                height: "42px",
-              }}
-            >
-              <MdOutlineDomain color={palette.success.main} size="20px" />
-            </VuiBox>
-            <VuiBox display="flex" flexDirection="column">
-              <VuiTypography color="white" variant="button" fontWeight="medium">
-                Bill & Taxes
-              </VuiTypography>
-              <VuiTypography color="text" variant="button" fontWeight="medium">
-                Today, 16:36
-              </VuiTypography>
-            </VuiBox>
-          </Stack>
-          <VuiTypography variant="button" color="white" fontWeight="bold">
-            -$154.50
-          </VuiTypography>
-        </VuiBox>
       </VuiBox>
     </Card>
   );

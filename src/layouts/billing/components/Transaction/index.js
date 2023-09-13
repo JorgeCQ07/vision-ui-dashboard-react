@@ -27,44 +27,46 @@ import VuiBox from "components/VuiBox";
 import VuiTypography from "components/VuiTypography";
 import VuiButton from "components/VuiButton";
 
-function Transaction({ color, icon, name, description, value }) {
+function Transaction({ id, type, ammount, description, date }) {
   return (
-    <VuiBox key={name} component="li" py={1} pr={2} mb={1}>
-      <VuiBox display="flex" justifyContent="space-between" alignItems="center">
-        <VuiBox display="flex" alignItems="center">
-          <VuiBox mr={2}>
-            <VuiButton
-              variant="outlined"
-              color={color}
-              sx={{ fontWeight: "bold", width: "35px", height: "35px" }}
-              size="small"
-              iconOnly
-              circular
-            >
-              <Icon sx={{ fontWeight: "bold" }}>{icon}</Icon>
-            </VuiButton>
-          </VuiBox>
-          <VuiBox display="flex" flexDirection="column">
-            <VuiTypography variant="button" color="white" fontWeight="medium" gutterBottom>
-              {name}
-            </VuiTypography>
-            <VuiTypography variant="caption" color="text">
-              {description}
-            </VuiTypography>
-          </VuiBox>
-        </VuiBox>
-        <VuiTypography
-          variant="button"
-          color={color}
-          fontWeight="medium"
-          sx={({ breakpoints }) => ({
-            [breakpoints.down("lg")]: {
-              minWidth: "75px",
-              ml: "12px",
-            },
-          })}
+    <VuiBox key={id} component="tr" py={1} pr={2} mb={1}>
+      <VuiBox mr={2} component={"td"}>
+        <VuiButton
+          variant="outlined"
+          color={type === "Ingreso" ? "success" : "error"}
+          iconOnly
+          circular
         >
-          {value}
+          <Icon sx={{ fontWeight: "bold" }}>
+            {type === "Ingreso" ? "arrow_upward" : "arrow_downward"}
+          </Icon>
+        </VuiButton>
+      </VuiBox>
+      <VuiBox component="td">
+        <VuiTypography variant="button" fontWeight="regular" color="text">
+          {id}
+        </VuiTypography>
+      </VuiBox>
+      <VuiBox component="td">
+        <VuiTypography variant="button" fontWeight="regular" color="text">
+          {ammount}
+        </VuiTypography>
+      </VuiBox>
+      <VuiBox component="td">
+        <VuiTypography variant="button" fontWeight="regular" color="text">
+          {description}
+        </VuiTypography>
+      </VuiBox>
+      <VuiBox component="td">
+        <VuiTypography variant="button" fontWeight="regular" color="text">
+          {date}
+        </VuiTypography>
+      </VuiBox>
+      <VuiBox component="td">
+        <VuiTypography variant="button" fontWeight="regular" color="text">
+          <Icon sx={{ fontWeight: "bold" }}>
+            edit
+          </Icon>
         </VuiTypography>
       </VuiBox>
     </VuiBox>
@@ -73,21 +75,11 @@ function Transaction({ color, icon, name, description, value }) {
 
 // Typechecking props of the Transaction
 Transaction.propTypes = {
-  color: PropTypes.oneOf([
-    "primary",
-    "secondary",
-    "info",
-    "success",
-    "warning",
-    "error",
-    "light",
-    "dark",
-    "text",
-  ]).isRequired,
-  icon: PropTypes.node.isRequired,
-  name: PropTypes.string.isRequired,
+  id: PropTypes.string.isRequired,
+  type: PropTypes.string.isRequired,
+  ammount: PropTypes.string.isRequired,
   description: PropTypes.string.isRequired,
-  value: PropTypes.string.isRequired,
+  date: PropTypes.string.isRequired,
 };
 
 export default Transaction;
