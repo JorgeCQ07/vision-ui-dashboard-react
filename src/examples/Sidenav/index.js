@@ -184,7 +184,7 @@ function Sidenav({ color, brandName, routes, ...rest }) {
                 })
               }
             >
-              <SimmmpleLogo size="24px" />
+              {/* <SimmmpleLogo size="24px" /> */}
             </VuiBox>
             <VuiTypography
               variant="button"
@@ -202,7 +202,7 @@ function Sidenav({ color, brandName, routes, ...rest }) {
                 })
               }
             >
-              {brandName}
+              StudyMinder
             </VuiTypography>
           </VuiBox>
         </VuiBox>
@@ -225,7 +225,7 @@ function Sidenav({ color, brandName, routes, ...rest }) {
           },
         })}
       >
-        <SidenavCard color={color} />
+        {/* <SidenavCard color={color} />
         <VuiBox mt={2}>
           <VuiButton
             component="a"
@@ -238,7 +238,7 @@ function Sidenav({ color, brandName, routes, ...rest }) {
           >
             Upgrade to PRO
           </VuiButton>
-        </VuiBox>
+        </VuiBox> */}
       </VuiBox>
     </SidenavRoot>
   );
