@@ -60,16 +60,17 @@ const action = (
 
 export default {
   columns: [
-    { name: "project", align: "left" },
-    { name: "budget", align: "left" },
-    { name: "status", align: "left" },
-    { name: "completion", align: "center" },
+    { name: "Titulo", align: "left" },
+    { name: "Descripcion", align: "left" },
+    { name: "Fecha", align: "left" },
+    { name: "Materia", align: "left" },
+    { name: "Estado", align: "left" },
     { name: "action", align: "center" },
   ],
 
   rows: [
     {
-      project: (
+      Titulo: (
         <VuiBox display="flex" alignItems="center">
           <AdobeXD size="20px" />
           <VuiTypography pl="16px" color="white" variant="button" fontWeight="medium">
@@ -77,21 +78,30 @@ export default {
           </VuiTypography>
         </VuiBox>
       ),
-      budget: (
+      Descripcion: (
         <VuiTypography variant="button" color="white" fontWeight="medium">
-          $14,000
+          Crear una funcion para ...
         </VuiTypography>
       ),
-      status: (
+      Fecha: (
+        <VuiTypography variant="button" color="white" fontWeight="medium">
+          12/12/2023
+        </VuiTypography>
+      ),
+      Materia: (
+        <VuiTypography variant="button" color="white" fontWeight="medium">
+          Globales
+        </VuiTypography>
+      ),
+      Estado: (
         <VuiTypography variant="button" color="white" fontWeight="medium">
           Working
         </VuiTypography>
       ),
-      completion: <Completion value={60} color="info" />,
       action,
     },
     {
-      project: (
+      Titulo: (
         <VuiBox display="flex" alignItems="center">
           <Atlassian size="20px" />
           <VuiTypography pl="16px" color="white" variant="button" fontWeight="medium">
@@ -99,21 +109,30 @@ export default {
           </VuiTypography>
         </VuiBox>
       ),
-      budget: (
+      Descripcion: (
         <VuiTypography variant="button" color="white" fontWeight="medium">
-          $3,000
+          Crear una función para ...
         </VuiTypography>
       ),
-      status: (
+      Fecha: (
+        <VuiTypography variant="button" color="white" fontWeight="medium">
+          12/12/2023
+        </VuiTypography>
+      ),
+      Materia: (
+        <VuiTypography variant="button" color="white" fontWeight="medium">
+          Globales
+        </VuiTypography>
+      ),
+      Estado: (
         <VuiTypography variant="button" color="white" fontWeight="medium">
           Done
         </VuiTypography>
       ),
-      completion: <Completion value={100} color="info" />,
       action,
     },
     {
-      project: (
+      Titulo: (
         <VuiBox display="flex" alignItems="center">
           <Slack size="20px" />
           <VuiTypography pl="16px" color="white" variant="button" fontWeight="medium">
@@ -121,21 +140,30 @@ export default {
           </VuiTypography>
         </VuiBox>
       ),
-      budget: (
+      Descripcion: (
         <VuiTypography variant="button" color="white" fontWeight="medium">
-          Not set
+          Definir la estructura...
         </VuiTypography>
       ),
-      status: (
+      Fecha: (
+        <VuiTypography variant="button" color="white" fontWeight="medium">
+          12/12/2023
+        </VuiTypography>
+      ),
+      Materia: (
+        <VuiTypography variant="button" color="white" fontWeight="medium">
+          Bases de datos
+        </VuiTypography>
+      ),
+      Estado: (
         <VuiTypography variant="button" color="white" fontWeight="medium">
           Canceled
         </VuiTypography>
       ),
-      completion: <Completion value={30} color="info" />,
       action,
     },
     {
-      project: (
+      Titulo: (
         <VuiBox display="flex" alignItems="center">
           <Spotify size="20px" />
           <VuiTypography pl="16px" color="white" variant="button" fontWeight="medium">
@@ -143,21 +171,30 @@ export default {
           </VuiTypography>
         </VuiBox>
       ),
-      budget: (
+      Descripcion: (
         <VuiTypography variant="button" color="white" fontWeight="medium">
-          $32,000
+          Arreglar metodo de...
         </VuiTypography>
       ),
-      status: (
+      Fecha: (
+        <VuiTypography variant="button" color="white" fontWeight="medium">
+          12/12/2023
+        </VuiTypography>
+      ),
+      Materia: (
+        <VuiTypography variant="button" color="white" fontWeight="medium">
+          Informatica
+        </VuiTypography>
+      ),
+      Estado: (
         <VuiTypography variant="button" color="white" fontWeight="medium">
           Canceled
         </VuiTypography>
       ),
-      completion: <Completion value={0} color="info" />,
       action,
     },
     {
-      project: (
+      Titulo: (
         <VuiBox display="flex" alignItems="center">
           <Jira size="20px" />
           <VuiTypography pl="16px" color="white" variant="button" fontWeight="medium">
@@ -165,18 +202,29 @@ export default {
           </VuiTypography>
         </VuiBox>
       ),
-      budget: (
+      Descripcion: (
         <VuiTypography variant="button" color="white" fontWeight="medium">
-          $2,300
+          Crear una funcion para ...
         </VuiTypography>
       ),
-      status: (
+      Fecha: (
+        <VuiTypography variant="button" color="white" fontWeight="medium">
+          12/12/2023
+        </VuiTypography>
+      ),
+      Materia: (
+        <VuiTypography variant="button" color="white" fontWeight="medium">
+          Programacion
+        </VuiTypography>
+      ),
+      Estado: (
         <VuiTypography variant="button" color="white" fontWeight="medium">
           Done
         </VuiTypography>
       ),
       completion: <Completion value={100} color="info" />,
       action,
-    },
+    }
+
   ],
 };
