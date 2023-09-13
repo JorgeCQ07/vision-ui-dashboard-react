@@ -150,7 +150,7 @@ function DashboardNavbar({ absolute, light, isMini }) {
         </VuiBox>
         {isMini ? null : (
           <VuiBox sx={(theme) => navbarRow(theme, { isMini })}>
-            <VuiBox pr={1}>
+            {/* <VuiBox pr={1}>
               <VuiInput
                 placeholder="Type here..."
                 icon={{ component: "search", direction: "left" }}
@@ -164,7 +164,7 @@ function DashboardNavbar({ absolute, light, isMini }) {
                   backgroundColor: "info.main !important",
                 })}
               />
-            </VuiBox>
+            </VuiBox> */}
             <VuiBox color={light ? "white" : "inherit"}>
               <Link to="/authentication/sign-in">
                 <IconButton sx={navbarIconButton} size="small">
