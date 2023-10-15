@@ -155,6 +155,20 @@ function Transactions() {
                 description="Beca"
                 date="12/12/2021"
               />
+              <Transaction
+                id="EXP-002"
+                type="Gasto"
+                ammount="$ 100.00"
+                description="Transporte"
+                date="12/12/2021"
+              />
+              <Transaction
+                id="EXP-003"
+                type="Gasto"
+                ammount="$ 100.00"
+                description="Transporte"
+                date="12/12/2021"
+              />
             </TableBody>
           </MuiTable>
         </TableContainer>
