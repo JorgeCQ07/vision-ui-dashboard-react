@@ -52,6 +52,8 @@ import { IoWallet } from "react-icons/io5";
 import { IoDocumentText } from "react-icons/io5";
 import { FaShoppingCart } from "react-icons/fa";
 
+import Calendar from "layouts/dashboard/components/Calendar";
+
 // Data
 import LineChart from "examples/Charts/LineCharts/LineChart";
 import BarChart from "examples/Charts/BarCharts/BarChart";
@@ -108,103 +110,10 @@ function Dashboard() {
                     Horario
                   </VuiTypography>
 
-                  <VuiBox sx={{ height: "350px" }}>
+                  <VuiBox sx={{ height: "750px" }}>
                     {/* Aqui tabla con horario */}
-                    <table className="table table-bordered"
-                      style={{ color: "white" }}>
-                      <thead>
-                        <tr>
-                          <th scope="col">Hora</th>
-                          <th scope="col">Lunes</th>
-                          <th scope="col">Martes</th>
-                          <th scope="col">Miércoles</th>
-                          <th scope="col">Jueves</th>
-                          <th scope="col">Viernes</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <tr>
-                          <th scope="row">8:00</th>
-                          <td>Progamacion</td>
-                          <td></td>
-                          <td></td>
-                          <td></td>
-                          <td></td>
-                          <td></td>
-                          <td></td>
-                        </tr>
-                        <tr>
-                          <th scope="row">9:00</th>
-                          <td></td>
-                          <td></td>
-                          <td>Globales</td>
-                          <td></td>
-                          <td></td>
-                          <td></td>
-                          <td></td>
-                        </tr>
-                        <tr>
-                          <th scope="row">10:00</th>
-                          <td></td>
-                          <td></td>
-                          <td>Globales</td>
-                          <td></td>
-                          <td></td>
-                          <td></td>
-                          <td></td>
-                        </tr>
-                        <tr>
-                          <th scope="row">11:00</th>
-                          <td></td>
-                          <td></td>
-                          <td></td>
-                          <td>Informatica</td>
-                          <td></td>
-                          <td></td>
-                          <td></td>
-                        </tr>
-                        <tr>
-                          <th scope="row">12:00</th>
-                          <td></td>
-                          <td>Bases de datos</td>
-                          <td></td>
-                          <td></td>
-                          <td></td>
-                          <td></td>
-                          <td></td>
-                        </tr>
-                        <tr>
-                          <th scope="row">13:00</th>
-                          <td></td>
-                          <td></td>
-                          <td></td>
-                          <td></td>
-                          <td></td>
-                          <td></td>
-                          <td></td>
-                        </tr>
-                        <tr>
-                          <th scope="row">14:00</th>
-                          <td></td>
-                          <td></td>
-                          <td></td>
-                          <td></td>
-                          <td></td>
-                          <td></td>
-                          <td></td>
-                        </tr>
-                        <tr>
-                          <th scope="row">15:00</th>
-                          <td></td>
-                          <td></td>
-                          <td></td>
-                          <td></td>
-                          <td></td>
-                          <td></td>
-                          <td></td>
-                        </tr>
-                      </tbody>
-                    </table>
+                    <Calendar />
+                    
                   </VuiBox>
                 </VuiBox>
               </Card>
