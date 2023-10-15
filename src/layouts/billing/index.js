@@ -1,20 +1,5 @@
-/*!
-
-=========================================================
-* Vision UI Free React - v1.0.0
-=========================================================
-
-* Product Page: https://www.creative-tim.com/product/vision-ui-free-react
-* Copyright 2021 Creative Tim (https://www.creative-tim.com/)
-* Licensed under MIT (https://github.com/creativetimofficial/vision-ui-free-react/blob/master LICENSE.md)
-
-* Design and Coded by Simmmple & Creative Tim
-
-=========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-
-*/
+//Hooks
+import React, { useState, useEffect } from "react";
 
 // @mui material components
 import Grid from "@mui/material/Grid";
@@ -36,7 +21,20 @@ import BillingInformation from "layouts/billing/components/BillingInformation";
 import Transactions from "layouts/billing/components/Transactions";
 import CreditBalance from "./components/CreditBalance";
 
+//Firebase crud
+import * as firebase from '../../services/billing.js'
+
 function Billing() {
+
+  const [balance, setBalance] = useState(0);
+  const [currentDate, setCurrentDate] = useState(new Date().toLocaleDateString());
+
+  useEffect(() => {
+    firebase.getBalance("1", currentDate).then((data) => {
+      setBalance(data);
+    });
+  }, []);
+
   return (
     <DashboardLayout>
       <DashboardNavbar />
@@ -46,7 +44,7 @@ function Billing() {
           <Grid item xs={12} lg={7} xl={8}>
             <Grid container spacing={3}>
               <Grid item xs={12} md={12} xl={6}>
-                <CreditBalance />
+                <CreditBalance balance={balance} />
               </Grid>
               <Grid item xs={12} md={12} xl={6}>
                 <Invoices />

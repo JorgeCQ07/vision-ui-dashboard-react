@@ -35,7 +35,7 @@ import VuiTypography from "components/VuiTypography";
 import { FaEllipsisH } from "react-icons/fa";
 import { MdOutlineDomain } from "react-icons/md";
 
-const CreditBalance = () => {
+const CreditBalance = ({ balance }) => {
   return (
     <Card sx={{ padding: "30px" }}>
       <VuiBox display="flex" flexDirection="column">
@@ -54,7 +54,10 @@ const CreditBalance = () => {
           </VuiBox>
           <VuiBox display="flex" justifyContent="space-beetween" alignItems="center">
             <VuiTypography variant="h2" color="white" fontWeight="bold" mr="auto">
-              $25,215
+              {balance < 0 ?
+                <span style={{ color: palette.error.main }}>₡{balance}</span>
+                : <span style={{ color: palette.success.main }}>₡{balance}</span>
+              }
             </VuiTypography>
             <VuiBox component="img" src={Graph} sx={{ width: "58px", height: "20px" }} />
           </VuiBox>

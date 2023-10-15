@@ -1,20 +1,5 @@
-/*!
-
-=========================================================
-* Vision UI Free React - v1.0.0
-=========================================================
-
-* Product Page: https://www.creative-tim.com/product/vision-ui-free-react
-* Copyright 2021 Creative Tim (https://www.creative-tim.com/)
-* Licensed under MIT (https://github.com/creativetimofficial/vision-ui-free-react/blob/master LICENSE.md)
-
-* Design and Coded by Simmmple & Creative Tim
-
-=========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-
-*/
+//hooks
+import { useState, useEffect } from "react";
 
 // @mui material components
 import Card from "@mui/material/Card";
@@ -34,7 +19,21 @@ import TableRow from "@mui/material/TableRow";
 // Billing page components
 import Transaction from "layouts/billing/components/Transaction";
 
+//Firebase crud
+import * as firebase from '../../../../services/billing.js'
+
 function Transactions() {
+
+  const [data, setData] = useState([]);
+  const [currentDate, setCurrentDate] = useState(new Date().toLocaleDateString());
+
+  useEffect(() => {
+    firebase.getBillingOrderByDate("1", currentDate).then((data) => {
+      setData(data);
+    });
+  }, []);
+
+
   return (
     <Card sx={{ height: "100%" }}>
       <VuiBox
@@ -68,7 +67,9 @@ function Transactions() {
             </Icon>
           </VuiBox>
           <VuiTypography variant="button" color="text" fontWeight="regular">
-            1 - 30 Marzo 2023
+            {
+              currentDate
+            }
           </VuiTypography>
         </VuiBox>
       </VuiBox>
@@ -133,42 +134,23 @@ function Transactions() {
               </TableRow>
             </VuiBox>
             <TableBody>
-              {/* Aqui agregar funcion para cargar movimientos desde BE */}
-              <Transaction
-                id="INC-001"
-                type="Ingreso"
-                ammount="$ 100.00"
-                description="Beca"
-                date="12/12/2021"
-              />
-              <Transaction
-                id="EXP-001"
-                type="Gasto"
-                ammount="$ 100.00"
-                description="Transporte"
-                date="12/12/2021"
-              />
-              <Transaction
-                id="INC-002"
-                type="Ingreso"
-                ammount="$ 100.00"
-                description="Beca"
-                date="12/12/2021"
-              />
-              <Transaction
-                id="EXP-002"
-                type="Gasto"
-                ammount="$ 100.00"
-                description="Transporte"
-                date="12/12/2021"
-              />
-              <Transaction
-                id="EXP-003"
-                type="Gasto"
-                ammount="$ 100.00"
-                description="Transporte"
-                date="12/12/2021"
-              />
+              {data.map((item, index) => (
+                item.type === "Ingreso" ?
+                  <Transaction
+                    id={`INC-${index}`}
+                    type={item.type}
+                    ammount={item.amount}
+                    description={item.description}
+                    date={item.date}
+                  /> :
+                  <Transaction
+                    id={`EXP-${index}`}
+                    type={item.type}
+                    ammount={item.amount}
+                    description={item.description}
+                    date={item.date}
+                  />
+              ))}
             </TableBody>
           </MuiTable>
         </TableContainer>
