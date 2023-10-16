@@ -1,6 +1,12 @@
 import { child, get, set, ref, push, orderByChild } from 'firebase/database';
 import db from '../data/firebaseConfig.js';
 
+//ID sequences
+const counters = require("../data/counters");
+const nextIncId = counters.nextIncId;
+const nextExpId = counters.nextExpId;
+
+// ...
 //Devuelve todas las finanzas de un usuario
 export async function getBilling(userId) {
     try {
@@ -21,6 +27,27 @@ export async function getBilling(userId) {
 }
 
 //Devuelve todas las finanzas de un usuario ordenadas por fecha
+// export async function getBillingOrderByDate(userId, currentDate) {
+//     try {
+//         //Read all data from finanza
+//         const snapshot = await get(child(ref(db), `finanza/`));
+//         if (snapshot.exists()) {
+//             const data = snapshot.val();
+//             //Filter data by userId
+//             const filteredData = Object.keys(data)
+//                 .filter(key => data[key].userId === userId).map(key => data[key]);
+//             //Filter data by current month
+//             const currentMonth = currentDate.split("/")[0];
+//             const filteredDataByMonth = filteredData.filter(key => key.date.split("/")[0] === currentMonth);
+//             return filteredDataByMonth;
+
+//         } else {
+//             throw new Error("No data available");
+//         }
+//     } catch (error) {
+//         alert(error.message);
+//     }
+// }
 export async function getBillingOrderByDate(userId, currentDate) {
     try {
         //Read all data from finanza
@@ -29,10 +56,14 @@ export async function getBillingOrderByDate(userId, currentDate) {
             const data = snapshot.val();
             //Filter data by userId
             const filteredData = Object.keys(data)
-                .filter(key => data[key].userId === userId).map(key => data[key]);
-            //Filter data by date
-            const filteredDataByDate = filteredData.filter(item => item.date === currentDate);
-            return filteredDataByDate;
+                .filter(key => data[key].userId === userId)
+                .map(key => ({ ...data[key], id: key }));
+            //Filter data by current month
+            const currentMonth = currentDate.split("/")[0];
+            const filteredDataByMonth = filteredData.filter(
+                key => key.date.split("/")[0] === currentMonth
+            );
+            return filteredDataByMonth;
         } else {
             throw new Error("No data available");
         }
@@ -53,15 +84,26 @@ export async function getBalance(userId, currentDate) {
 }
 
 //Guarda en finanza/{autoId}
-//@TODO: Si es gasto inicar el autoId con "EXP-", si es ingreso iniciar con "INC-"
 export function postBilling(description, amount, date, type, userId) {
-    const newFinanza = ref(db, `finanza/`);
-    const newFinanzaRef = push(newFinanza);
-    set(newFinanzaRef, {
+    let nextId;
+    if (type === "Ingreso") {
+        const nextIncId = counters.nextIncId + 1;
+        nextId = `INC-${nextIncId.toString().padStart(3, "0")}`;
+        counters.nextIncId = nextIncId;
+    } else {
+        const nextExpId = counters.nextExpId + 1;
+        nextId = `EXP-${nextExpId.toString().padStart(3, "0")}`;
+        counters.nextExpId = nextExpId;
+    }
+
+    const newFinanza = {
         description: description,
         amount: amount,
         date: date,
         type: type,
         userId: userId
-    });
+    };
+
+    // TODO: Send newFinanza to server
+    set(ref(db, `finanza/${nextId}`), newFinanza);
 }
