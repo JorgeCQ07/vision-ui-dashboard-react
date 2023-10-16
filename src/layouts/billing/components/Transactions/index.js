@@ -19,19 +19,14 @@ import TableRow from "@mui/material/TableRow";
 // Billing page components
 import Transaction from "layouts/billing/components/Transaction";
 
-//Firebase crud
-import * as firebase from '../../../../services/billing.js'
-
-function Transactions() {
+function Transactions({ values }) {
 
   const [data, setData] = useState([]);
   const [currentDate, setCurrentDate] = useState(new Date().toLocaleDateString());
 
   useEffect(() => {
-    firebase.getBillingOrderByDate("1", currentDate).then((data) => {
-      setData(data);
-    });
-  }, []);
+    setData(values);
+  }, [values]);
 
 
   return (
@@ -137,14 +132,14 @@ function Transactions() {
               {data.map((item, index) => (
                 item.type === "Ingreso" ?
                   <Transaction
-                    id={`INC-${index}`}
+                    id={item.id}
                     type={item.type}
                     ammount={item.amount}
                     description={item.description}
                     date={item.date}
                   /> :
                   <Transaction
-                    id={`EXP-${index}`}
+                    id={item.id}
                     type={item.type}
                     ammount={item.amount}
                     description={item.description}
