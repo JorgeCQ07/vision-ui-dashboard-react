@@ -7,8 +7,6 @@ import Grid from "@mui/material/Grid";
 // Vision UI Dashboard React components
 import VuiBox from "components/VuiBox";
 
-// Vision UI Dashboard React components
-import MasterCard from "examples/Cards/MasterCard";
 // Vision UI Dashboard React example components
 import DashboardLayout from "examples/LayoutContainers/DashboardLayout";
 import DashboardNavbar from "examples/Navbars/DashboardNavbar";
@@ -27,11 +25,15 @@ import * as firebase from '../../services/billing.js'
 function Billing() {
 
   const [balance, setBalance] = useState(0);
+  const [data, setData] = useState([]);
   const [currentDate, setCurrentDate] = useState(new Date().toLocaleDateString());
 
   useEffect(() => {
     firebase.getBalance("1", currentDate).then((data) => {
       setBalance(data);
+    });
+    firebase.getBillingOrderByDate("1", currentDate).then((data) => {
+      setData(data);
     });
   }, []);
 
@@ -43,11 +45,11 @@ function Billing() {
         <VuiBox >
           <Grid item xs={12} lg={7} xl={8}>
             <Grid container spacing={3}>
-              <Grid item xs={12} md={12} xl={6}>
+              <Grid item xs={12} md={6} xl={6}>
                 <CreditBalance balance={balance} />
               </Grid>
-              <Grid item xs={12} md={12} xl={6}>
-                <Invoices />
+              <Grid item xs={12} md={6} xl={6}>
+                <Invoices values={data} />
               </Grid>
             </Grid>
           </Grid>
@@ -55,8 +57,8 @@ function Billing() {
         {/* Tabla de transacciones */}
         <VuiBox>
           <Grid container spacing={3}>
-            <Grid item xs={12} md={11}>
-              <Transactions />
+            <Grid item xs={12} md={12}>
+              <Transactions values={data} />
             </Grid>
           </Grid>
         </VuiBox>
