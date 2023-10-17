@@ -55,18 +55,18 @@ function SignIn() {
 
   return (
     <CoverLayout
-      title="Nice to see you!"
+      title="Bienvenido!"
       color="white"
-      description="Enter your email and password to sign in"
+      description="Ingresa tus datos para acceder a la plataforma."
       premotto="INSPIRED BY THE FUTURE:"
-      motto="THE VISION UI DASHBOARD"
+      motto="STUDYMINDER"
       image={bgSignIn}
     >
       <VuiBox component="form" role="form">
         <VuiBox mb={2}>
           <VuiBox mb={1} ml={0.5}>
             <VuiTypography component="label" variant="button" color="white" fontWeight="medium">
-              Email
+              Correo
             </VuiTypography>
           </VuiBox>
           <GradientBorder
@@ -79,13 +79,13 @@ function SignIn() {
               palette.gradients.borderLight.angle
             )}
           >
-            <VuiInput type="email" placeholder="Your email..." fontWeight="500" id='email' />
+            <VuiInput type="email" placeholder="Correo electronico..." fontWeight="500" id='email' />
           </GradientBorder>
         </VuiBox>
         <VuiBox mb={2}>
           <VuiBox mb={1} ml={0.5}>
             <VuiTypography component="label" variant="button" color="white" fontWeight="medium">
-              Password
+              Contraseña
             </VuiTypography>
           </VuiBox>
           <GradientBorder
@@ -100,7 +100,7 @@ function SignIn() {
           >
             <VuiInput
               type="password"
-              placeholder="Your password..."
+              placeholder="Contraseña..."
               sx={({ typography: { size } }) => ({
                 fontSize: size.sm,
               })}
@@ -117,19 +117,19 @@ function SignIn() {
             onClick={handleSetRememberMe}
             sx={{ cursor: "pointer", userSelect: "none" }}
           >
-            &nbsp;&nbsp;&nbsp;&nbsp;Remember me
+            &nbsp;&nbsp;&nbsp;&nbsp;Recordarme
           </VuiTypography>
         </VuiBox>
         <VuiBox mt={4} mb={1}>
           <VuiButton color="info" fullWidth id='submit'
             onClick={handleSubmit}
           >
-            SIGN IN
+            Iniciar sesión
           </VuiButton>
         </VuiBox>
         <VuiBox mt={3} textAlign="center">
           <VuiTypography variant="button" color="text" fontWeight="regular">
-            Don&apos;t have an account?{" "}
+            No tienes una cuenta?{" "}
             <VuiTypography
               component={Link}
               to="/authentication/sign-up"
@@ -137,7 +137,7 @@ function SignIn() {
               color="white"
               fontWeight="medium"
             >
-              Sign up
+              Crea una
             </VuiTypography>
           </VuiTypography>
         </VuiBox>

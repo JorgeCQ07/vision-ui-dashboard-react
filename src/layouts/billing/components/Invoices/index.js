@@ -20,9 +20,11 @@ import { signOut } from "../../../../services/auth.js";
 function Invoices({ values }) {
 
   const [data, setData] = useState([]);
+  const [currentDate, setCurrentDate] = useState(new Date().toLocaleDateString());
 
   useEffect(() => {
     setData(values);
+    setCurrentDate(new Date().toLocaleDateString());
   }, [values]);
 
   return (
@@ -33,11 +35,14 @@ function Invoices({ values }) {
         </VuiTypography>
         <VuiButton variant="contained" color="info" size="small"
           onClick={() => {
-            //firebase.postBilling("Pago", 1000, "10/14/2023", "Ingreso", "1");
+            firebase.postBilling("Pago", 1000, "10/14/2023", "Ingreso", "1");
             //@TODO: Esto al guardar en el modal
             // firebase.getBilling("1").then((data) => {
             //   setData(data);
             // });
+            firebase.getBillingOrderByDate("1", currentDate).then((data) => {
+              setData(data);
+            });
 
             //CERRAR SESION
             // const auth = getAuth();
@@ -46,7 +51,7 @@ function Invoices({ values }) {
             // }).catch((error) => {
             //   // An error happened.
             // });
-            signOut();
+            //signOut();
             //console.log(useAuth());
           }}
         >

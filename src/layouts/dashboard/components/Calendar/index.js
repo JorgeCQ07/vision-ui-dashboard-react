@@ -112,7 +112,7 @@ function Calendar() {
         select={handleDateSelect}
         eventClick={handleEventClick}
       />
-      {isModalOpen && 
+      {isModalOpen &&
         <EventModal
           start={selectedStart}
           end={selectedEnd}

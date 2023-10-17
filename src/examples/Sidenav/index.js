@@ -16,7 +16,7 @@
 
 */
 
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 // react-router-dom components
 import { useLocation, NavLink } from "react-router-dom";
@@ -49,6 +49,10 @@ import { useVisionUIController, setMiniSidenav, setTransparentSidenav } from "co
 // Vision UI Dashboard React icons
 import SimmmpleLogo from "examples/Icons/SimmmpleLogo";
 
+//Firebase auth
+import { getAuth, onAuthStateChanged } from "firebase/auth";
+import { signOut } from "../../services/auth.js";
+
 // function Sidenav({ color, brand, brandName, routes, ...rest }) {
 function Sidenav({ color, brandName, routes, ...rest }) {
   const [controller, dispatch] = useVisionUIController();
@@ -56,6 +60,7 @@ function Sidenav({ color, brandName, routes, ...rest }) {
   const location = useLocation();
   const { pathname } = location;
   const collapseName = pathname.split("/").slice(1)[0];
+  const [user, setUser] = useState(null);
 
   const closeSidenav = () => setMiniSidenav(dispatch, true);
 
@@ -81,6 +86,13 @@ function Sidenav({ color, brandName, routes, ...rest }) {
     if (window.innerWidth < 1440) {
       setTransparentSidenav(dispatch, false);
     }
+    const auth = getAuth();
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        const uid = user.uid;
+        setUser(uid);
+      }
+    });
   }, []);
 
   // Render all the routes from the routes.js (All the visible items on the Sidenav)
@@ -225,20 +237,20 @@ function Sidenav({ color, brandName, routes, ...rest }) {
           },
         })}
       >
-        {/* <SidenavCard color={color} />
+        {/* <SidenavCard color={color} /> */}
         <VuiBox mt={2}>
           <VuiButton
             component="a"
-            href="https://creative-tim.com/product/vision-ui-dashboard-pro-react"
             target="_blank"
             rel="noreferrer"
             variant="gradient"
             color={color}
+            onClick={signOut}
             fullWidth
           >
-            Upgrade to PRO
+            {user ? "Cerrar sesión" : "Iniciar sesión"}
           </VuiButton>
-        </VuiBox> */}
+        </VuiBox>
       </VuiBox>
     </SidenavRoot>
   );

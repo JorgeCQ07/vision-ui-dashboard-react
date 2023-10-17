@@ -1,20 +1,5 @@
-/*!
-
-=========================================================
-* Vision UI Free React - v1.0.0
-=========================================================
-
-* Product Page: https://www.creative-tim.com/product/vision-ui-free-react
-* Copyright 2021 Creative Tim (https://www.creative-tim.com/)
-* Licensed under MIT (https://github.com/creativetimofficial/vision-ui-free-react/blob/master LICENSE.md)
-
-* Design and Coded by Simmmple & Creative Tim
-
-=========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-
-*/
+//Hooks
+import React, { useState, useEffect } from "react";
 
 // @mui material components
 import Grid from "@mui/material/Grid";
@@ -62,9 +47,25 @@ import { lineChartOptionsDashboard } from "layouts/dashboard/data/lineChartOptio
 import { barChartDataDashboard } from "layouts/dashboard/data/barChartData";
 import { barChartOptionsDashboard } from "layouts/dashboard/data/barChartOptions";
 
+//Firebase auth
+import { getAuth, onAuthStateChanged } from "firebase/auth";
+
 function Dashboard() {
   const { gradients } = colors;
   const { cardContent } = gradients;
+
+  useEffect(() => {
+    const auth = getAuth();
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        const uid = user.uid;
+
+      } else {
+        // User is signed out
+        window.location.href = "/authentication/sign-in";
+      }
+    });
+  }, []);
 
   return (
     <DashboardLayout>
@@ -72,7 +73,7 @@ function Dashboard() {
       <VuiBox py={3}>
         <VuiBox mb={3}>
           <Grid container spacing={3}>
-            <Grid item xs={12} md={6} xl={3}>
+            <Grid item xs={12} md={4} xl={4}>
               <MiniStatisticsCard
                 title={{ text: "today's money", fontWeight: "regular" }}
                 count="₡53,000"
@@ -80,14 +81,14 @@ function Dashboard() {
                 icon={{ color: "info", component: <IoWallet size="22px" color="white" /> }}
               />
             </Grid>
-            <Grid item xs={12} md={6} xl={3}>
+            <Grid item xs={12} md={4} xl={4}>
               <MiniStatisticsCard
                 title={{ text: "Cantidad de notas" }}
                 count="12"
                 icon={{ color: "info", component: <IoGlobe size="22px" color="white" /> }}
               />
             </Grid>
-            <Grid item xs={12} md={6} xl={3}>
+            <Grid item xs={12} md={4} xl={4}>
               <MiniStatisticsCard
                 title={{ text: "Cantidad de tareas" }}
                 count="8"
@@ -102,7 +103,7 @@ function Dashboard() {
         </VuiBox>
         <VuiBox mb={3}>
           <Grid container spacing={3}>
-            <Grid item xs={12} lg={6} xl={7}>
+            <Grid item xs={12} lg={12} xl={12}>
               <Card>
                 {/* Horario */}
                 <VuiBox sx={{ height: "100%" }}>
@@ -113,66 +114,12 @@ function Dashboard() {
                   <VuiBox sx={{ height: "750px" }}>
                     {/* Aqui tabla con horario */}
                     <Calendar />
-                    
+
                   </VuiBox>
                 </VuiBox>
               </Card>
             </Grid>
-            <Grid item xs={12} lg={6} xl={5}>
-              <Card>
-                <VuiBox>
 
-                  <VuiTypography variant="lg" color="white" fontWeight="bold" mb="5px">
-                    Notas rapidas
-                  </VuiTypography>
-                  <VuiBox>
-                    <VuiBox
-                      component="form"
-                      sx={{
-                        alignItems: "center",
-                        justifyContent: "space-between",
-                        mb: 1,
-                        height: "200px",
-                      }}
-                    >
-                      <VuiBox
-                        component="input"
-                        type="text"
-                        placeholder="Agregar nota"
-                        sx={{
-                          width: "100%",
-                          height: "80%",
-                          border: "none",
-                          outline: "none",
-                          fontSize: "14px",
-                          color: "white",
-                          backgroundColor: "transparent",
-                        }}
-                      />
-                      <br></br>
-                      <VuiBox
-                        component="button"
-                        type="button"
-                        sx={{
-                          border: "none",
-                          outline: "none",
-                          backgroundColor: "transparent",
-                          cursor: "pointer",
-                        }}
-                      >
-                        Guardar
-                        <Icon
-                          color="white"
-                          component={IoIosRocket}
-                          sx={{ fontSize: "22px" }}
-                        />
-                      </VuiBox>
-                    </VuiBox>
-                  </VuiBox>
-
-                </VuiBox>
-              </Card>
-            </Grid>
           </Grid>
         </VuiBox>
         {/* <Grid container spacing={3} direction="row" justifyContent="center" alignItems="stretch">

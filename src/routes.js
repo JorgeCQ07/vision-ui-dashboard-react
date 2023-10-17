@@ -46,6 +46,7 @@ import RTL from "layouts/rtl";
 import Profile from "layouts/profile";
 import SignIn from "layouts/authentication/sign-in";
 import SignUp from "layouts/authentication/sign-up";
+import NotesOverview from "layouts/notes";
 
 // Vision UI Dashboard React icons
 import { IoRocketSharp } from "react-icons/io5";
@@ -73,6 +74,15 @@ const routes = [
     route: "/tables",
     icon: <IoStatsChart size="15px" color="inherit" />,
     component: Tables,
+    noCollapse: true,
+  },
+  {
+    type: "collapse",
+    name: "Notes",
+    key: "notes",
+    route: "/notes",
+    icon: <IoBuild size="15px" color="inherit" />,
+    component: NotesOverview,
     noCollapse: true,
   },
   {
@@ -112,6 +122,7 @@ const routes = [
     component: SignUp,
     noCollapse: true,
   },
+
 ];
 
 export default routes;

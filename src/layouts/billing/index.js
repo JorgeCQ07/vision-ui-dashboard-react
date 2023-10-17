@@ -21,7 +21,6 @@ import CreditBalance from "./components/CreditBalance";
 
 //Firebase crud
 import * as firebase from '../../services/billing.js'
-import { useAuth } from "../../services/auth.js";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 
 function Billing() {
