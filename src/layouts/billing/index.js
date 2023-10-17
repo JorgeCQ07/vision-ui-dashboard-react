@@ -21,6 +21,8 @@ import CreditBalance from "./components/CreditBalance";
 
 //Firebase crud
 import * as firebase from '../../services/billing.js'
+import { useAuth } from "../../services/auth.js";
+import { getAuth, onAuthStateChanged } from "firebase/auth";
 
 function Billing() {
 
@@ -29,12 +31,26 @@ function Billing() {
   const [currentDate, setCurrentDate] = useState(new Date().toLocaleDateString());
 
   useEffect(() => {
-    firebase.getBalance("1", currentDate).then((data) => {
-      setBalance(data);
+    const auth = getAuth();
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        // User is signed in, see docs for a list of available properties
+        // https://firebase.google.com/docs/reference/js/auth.user
+        const uid = user.uid;
+        firebase.getBalance("1", currentDate).then((data) => {
+          setBalance(data);
+        });
+        firebase.getBillingOrderByDate("1", currentDate).then((data) => {
+          setData(data);
+        });
+        // ...
+      } else {
+        // User is signed out
+        window.location.href = "/authentication/sign-in";
+        // ...
+      }
     });
-    firebase.getBillingOrderByDate("1", currentDate).then((data) => {
-      setData(data);
-    });
+
   }, []);
 
   return (
