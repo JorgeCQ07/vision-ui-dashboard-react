@@ -1,21 +1,3 @@
-/*!
-
-=========================================================
-* Vision UI Free React - v1.0.0
-=========================================================
-
-* Product Page: https://www.creative-tim.com/product/vision-ui-free-react
-* Copyright 2021 Creative Tim (https://www.creative-tim.com/)
-* Licensed under MIT (https://github.com/creativetimofficial/vision-ui-free-react/blob/master LICENSE.md)
-
-* Design and Coded by Simmmple & Creative Tim
-
-=========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-
-*/
-
 import { useState } from "react";
 
 // react-router-dom components
@@ -40,10 +22,36 @@ import CoverLayout from "layouts/authentication/components/CoverLayout";
 // Images
 import bgSignIn from "assets/images/signInImage.png";
 
+// Firebase auth
+import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+
+// React router
+import { useHistory } from "react-router-dom";
+
 function SignIn() {
   const [rememberMe, setRememberMe] = useState(true);
 
   const handleSetRememberMe = () => setRememberMe(!rememberMe);
+
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const email = document.getElementById('email').value;
+    const password = document.getElementById('password').value;
+    const auth = getAuth();
+    signInWithEmailAndPassword(auth, email, password)
+      .then((userCredential) => {
+        // Signed in 
+        const user = userCredential.user.uid;
+        window.location.href = "/billing";
+        // ...
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        alert(`Error: Usuario o contraseña incorrectos`);
+      });
+  }
 
   return (
     <CoverLayout
@@ -71,7 +79,7 @@ function SignIn() {
               palette.gradients.borderLight.angle
             )}
           >
-            <VuiInput type="email" placeholder="Your email..." fontWeight="500" />
+            <VuiInput type="email" placeholder="Your email..." fontWeight="500" id='email' />
           </GradientBorder>
         </VuiBox>
         <VuiBox mb={2}>
@@ -96,6 +104,7 @@ function SignIn() {
               sx={({ typography: { size } }) => ({
                 fontSize: size.sm,
               })}
+              id='password'
             />
           </GradientBorder>
         </VuiBox>
@@ -112,7 +121,9 @@ function SignIn() {
           </VuiTypography>
         </VuiBox>
         <VuiBox mt={4} mb={1}>
-          <VuiButton color="info" fullWidth>
+          <VuiButton color="info" fullWidth id='submit'
+            onClick={handleSubmit}
+          >
             SIGN IN
           </VuiButton>
         </VuiBox>
