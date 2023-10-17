@@ -14,6 +14,8 @@ import Invoice from "layouts/billing/components/Invoice";
 
 //Firebase crud
 import * as firebase from '../../../../services/billing.js'
+import { getAuth } from "firebase/auth";
+import { signOut } from "../../../../services/auth.js";
 
 function Invoices({ values }) {
 
@@ -31,11 +33,21 @@ function Invoices({ values }) {
         </VuiTypography>
         <VuiButton variant="contained" color="info" size="small"
           onClick={() => {
-            firebase.postBilling("Pago", 1000, "10/14/2023", "Ingreso", "1");
+            //firebase.postBilling("Pago", 1000, "10/14/2023", "Ingreso", "1");
             //@TODO: Esto al guardar en el modal
             // firebase.getBilling("1").then((data) => {
             //   setData(data);
             // });
+
+            //CERRAR SESION
+            // const auth = getAuth();
+            // signOut(auth).then(() => {
+            //   // Sign-out successful.
+            // }).catch((error) => {
+            //   // An error happened.
+            // });
+            signOut();
+            //console.log(useAuth());
           }}
         >
           Nuevo
