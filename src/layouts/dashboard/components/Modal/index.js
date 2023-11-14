@@ -84,7 +84,7 @@ function EventModal({ start, end, isMultiDay, timeStart, timeEnd, selectedEvent,
                 <div>
                     <label>
                         Título
-                        <input type="text" value={title} onChange={(e) => setTitle(e.target.value)} />
+                        <input type="text" value={title} onChange={(e) => setTitle(e.target.value)} required />
                     </label>
                 </div>
                 <div>
@@ -96,7 +96,7 @@ function EventModal({ start, end, isMultiDay, timeStart, timeEnd, selectedEvent,
                 <div>
                     <label>
                         Email
-                        <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} />
+                        <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} required />
                     </label>
                 </div>
                 <div>

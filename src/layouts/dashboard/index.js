@@ -111,7 +111,7 @@ function Dashboard() {
                     Horario
                   </VuiTypography>
 
-                  <VuiBox sx={{ height: "750px" }}>
+                  <VuiBox sx={{ height: "900px" }}>
                     {/* Aqui tabla con horario */}
                     <Calendar />
 

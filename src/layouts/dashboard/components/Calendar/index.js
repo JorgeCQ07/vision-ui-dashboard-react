@@ -6,8 +6,7 @@ import timeGridPlugin from '@fullcalendar/timegrid';
 import { convertToApiEvent, convertToFullCalendarEvent, convertToApiEvents } from './functions/index';
 import EventModal from '../Modal/index'
 import { getEvents, createEvent, updateEvent, deleteEvent } from '../../../../shared/index';
-import '../../../../assets/css/modal-style.css';
-
+import '../../../../assets/css/calendar-style.css'
 
 function Calendar() {
   const [events, setEvents] = useState([]);
@@ -97,7 +96,7 @@ function Calendar() {
     <div className='calendar-container'>
       <FullCalendar
         plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
-        initialView="timeGridWeek"
+        initialView="dayGridMonth"
         headerToolbar={{
           left: 'prev,next today',
           center: 'title',

@@ -1,10 +1,10 @@
-/* CSS */
 .calendar-container {
-  max-width: 900px;
+  max-width: 1000px; /* Reducido de 500px a 300px */
   margin: 0 auto;
   border-radius: 10px;
-  padding: 20px;
+  padding: 20px; /* Padding reducido para un look más compacto */
 }
+
 
 .fc-event {
   border: none;
