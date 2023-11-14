@@ -30,7 +30,7 @@ const CreditBalance = ({ balance }) => {
         >
           <VuiBox display="flex" justifyContent="space-beetween" alignItems="center">
             <VuiTypography variant="caption" color="white" fontWeight="medium" mr="auto">
-              Credit Balance
+              Balance de crédito
             </VuiTypography>
             <FaEllipsisH color="white" size="18px" sx={{ cursor: "pointer" }} />
           </VuiBox>

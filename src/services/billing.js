@@ -87,13 +87,13 @@ export async function getBalance(userId, currentDate) {
 export function postBilling(description, amount, date, type, userId) {
     let nextId;
     if (type === "Ingreso") {
-        const nextIncId = counters.nextIncId + 1;
+        const nextIncId = counters.nextIncId;
         nextId = `INC-${nextIncId.toString().padStart(3, "0")}`;
-        counters.nextIncId = nextIncId;
+        counters.nextIncId = nextIncId + 1;
     } else {
-        const nextExpId = counters.nextExpId + 1;
+        const nextExpId = counters.nextExpId;
         nextId = `EXP-${nextExpId.toString().padStart(3, "0")}`;
-        counters.nextExpId = nextExpId;
+        counters.nextExpId = nextExpId + 1;
     }
 
     const newFinanza = {

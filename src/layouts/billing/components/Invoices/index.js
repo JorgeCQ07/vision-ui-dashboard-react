@@ -11,13 +11,14 @@ import VuiButton from "components/VuiButton";
 
 // Billing page components
 import Invoice from "layouts/billing/components/Invoice";
+import Modal from "../Modal/index.js";
 
 //Firebase crud
 import * as firebase from '../../../../services/billing.js'
 import { getAuth } from "firebase/auth";
 import { signOut } from "../../../../services/auth.js";
 
-function Invoices({ values }) {
+function Invoices({ values, showModal }) {
 
   const [data, setData] = useState([]);
   const [currentDate, setCurrentDate] = useState(new Date().toLocaleDateString());
@@ -35,24 +36,9 @@ function Invoices({ values }) {
         </VuiTypography>
         <VuiButton variant="contained" color="info" size="small"
           onClick={() => {
-            firebase.postBilling("Pago", 1000, "10/14/2023", "Ingreso", "1");
-            //@TODO: Esto al guardar en el modal
-            // firebase.getBilling("1").then((data) => {
-            //   setData(data);
-            // });
-            firebase.getBillingOrderByDate("1", currentDate).then((data) => {
-              setData(data);
-            });
+            // AQUI Abrir modal
+            showModal(true);
 
-            //CERRAR SESION
-            // const auth = getAuth();
-            // signOut(auth).then(() => {
-            //   // Sign-out successful.
-            // }).catch((error) => {
-            //   // An error happened.
-            // });
-            //signOut();
-            //console.log(useAuth());
           }}
         >
           Nuevo

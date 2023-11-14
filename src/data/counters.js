@@ -1,4 +1,4 @@
 module.exports = {
-    nextIncId: 0,
-    nextExpId: 0
+    nextIncId: 1,
+    nextExpId: 1
 };

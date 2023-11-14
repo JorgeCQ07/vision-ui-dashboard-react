@@ -13,21 +13,22 @@ import DashboardNavbar from "examples/Navbars/DashboardNavbar";
 import Footer from "examples/Footer";
 
 // Billing page components
-import PaymentMethod from "layouts/billing/components/PaymentMethod";
 import Invoices from "layouts/billing/components/Invoices";
-import BillingInformation from "layouts/billing/components/BillingInformation";
 import Transactions from "layouts/billing/components/Transactions";
 import CreditBalance from "./components/CreditBalance";
+import Modal from "./components/Modal/index.js";
 
 //Firebase crud
 import * as firebase from '../../services/billing.js'
 import { getAuth, onAuthStateChanged } from "firebase/auth";
+import { set } from "firebase/database";
 
 function Billing() {
 
   const [balance, setBalance] = useState(0);
   const [data, setData] = useState([]);
   const [currentDate, setCurrentDate] = useState(new Date().toLocaleDateString());
+  const [showModal, setShowModal] = useState(false);
 
   useEffect(() => {
     const auth = getAuth();
@@ -52,6 +53,19 @@ function Billing() {
 
   }, []);
 
+  const handleNewInvoice = (invoice) => {
+    firebase.postBilling(invoice.description, invoice.amount, invoice.date, invoice.type, "1")
+    firebase.getBalance("1", currentDate).then((data) => {
+      setBalance(data);
+    }
+    );
+    firebase.getBillingOrderByDate("1", currentDate).then((data) => {
+      setData(data);
+    }
+    );
+    setShowModal(false);
+  };
+
   return (
     <DashboardLayout>
       <DashboardNavbar />
@@ -64,7 +78,7 @@ function Billing() {
                 <CreditBalance balance={balance} />
               </Grid>
               <Grid item xs={12} md={6} xl={6}>
-                <Invoices values={data} />
+                <Invoices values={data} showModal={setShowModal} />
               </Grid>
             </Grid>
           </Grid>
@@ -79,6 +93,18 @@ function Billing() {
         </VuiBox>
       </VuiBox>
       <Footer />
+
+      {/* Modal */}
+      {showModal ? (
+        <Modal
+          isOpen={showModal}
+          onClose={() => {
+            setShowModal(false);
+          }}
+          onSave={handleNewInvoice}
+        ></Modal>
+      ) : null}
+
     </DashboardLayout>
   );
 }
